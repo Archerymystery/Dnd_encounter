@@ -1,0 +1,80 @@
+:root {
+ --radius:8px;
+   /** Base colors */
+--clr-dark-a0: #000000;
+--clr-light-a0: #ffffff;
+
+/** Dark theme primary colors */
+--clr-primary-a0: #ffa500;
+--clr-primary-a10: #ffaf35;
+--clr-primary-a20: #ffb952;
+--clr-primary-a30: #ffc36c;
+--clr-primary-a40: #ffcd85;
+--clr-primary-a50: #ffd79d;
+
+/** Dark theme surface colors */
+--clr-surface-a0: #1c1c1c;
+--clr-surface-a10: #313131;
+--clr-surface-a20: #474747;
+--clr-surface-a30: #5f5f5f;
+--clr-surface-a40: #777777;
+--clr-surface-a50: #919191;
+
+/** Dark theme tonal surface colors */
+--clr-surface-tonal-a0: #453420;
+--clr-surface-tonal-a10: #584835;
+--clr-surface-tonal-a20: #6c5c4b;
+--clr-surface-tonal-a30: #807162;
+--clr-surface-tonal-a40: #94887b;
+--clr-surface-tonal-a50: #a99e94;
+
+ /** Examples */ 
+.bg-primary {
+ color: var(--clr-primary-a50); 
+ background-color: var(--clr-surface-a0); 
+}
+  }
+.player{
+    background-color:var(--clr-surface-a10);
+    width: 100px;
+    border-radius: var(--radius);
+    padding-top: 5px;
+}
+a {
+    color: var(--clr-light-a0);
+    font-family: 'Azeret Mono', monospace;
+}
+img {
+    border-radius: var(--radius);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+a.small{
+    font-size: 10px;
+}
+a.big{
+    font-size: 16px;
+}
+a.tpHP{
+    font-size: 8px;
+    color: var(--clr-primary-a30);
+    position: relative;
+
+    bottom: -5px;
+}
+a.hp{
+    position: relative;
+    left: 5px;
+}
+a.lv{
+    position:fixed;
+    top: 7px;
+    background-color: var(--clr-surface-a20);
+    border-radius: 11px;
+    height: 22px;
+    width: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
