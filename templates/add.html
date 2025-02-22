@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>DND Encounter <st</title>
+    <link rel="stylesheet" href="../static/add.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+  </head>
+  <body>
+   <form>
+    <h2>Додати гравця</h2>
+    <div>
+        <label for="name">Ім'я</label><br>
+        <input id="name"name="name" type="text" required><br>
+        <label for="initiative">Ініціатива</label><br>
+        <input id="initiative" name="initiative" type="number" min="1" required><br>
+        <label for="speed">Speed</label><br>
+        <input id="speed" name="speed" type="number" min="1" required><br>
+        <label for="hp">HP max</label><br>
+        <input id="hp" name="hp" type="number" min="1" required><br>
+        <label for="img">Зображення</label><br>
+        <label class="file-input-wrapper">
+            <input type="file" class="real-input" required>
+            <span class="custom-button">Обрати файл</span>
+        </label>
+    </div>
+    <input id="submit" name="submit" type="submit" title="Створити" >
+   </form>
+  </body>
+</html>

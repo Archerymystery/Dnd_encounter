@@ -28,21 +28,28 @@
 --clr-surface-tonal-a40: #94887b;
 --clr-surface-tonal-a50: #a99e94;
 
- /** Examples */ 
-.bg-primary {
- color: var(--clr-primary-a50); 
- background-color: var(--clr-surface-a0); 
+
 }
-  }
+.selected{
+    background-color:var(--clr-surface-a10);
+    width: 400px;
+    border-radius: var(--radius);
+    padding-top: 20px;
+    margin: auto;
+    position: relative; 
+}
 .player{
     background-color:var(--clr-surface-a10);
-    width: 100px;
+    width: 200px;
     border-radius: var(--radius);
-    padding-top: 5px;
+    padding-top: 10px;
+    position: relative; 
+    cursor: pointer;
 }
 a {
     color: var(--clr-light-a0);
-    font-family: 'Azeret Mono', monospace;
+    font-family: "Cousine", serif;
+    
 }
 img {
     border-radius: var(--radius);
@@ -51,13 +58,13 @@ img {
     margin-right: auto;
 }
 a.small{
-    font-size: 10px;
+    font-size: 25px;
 }
 a.big{
-    font-size: 16px;
+    font-size: 30px;
 }
 a.tpHP{
-    font-size: 8px;
+    font-size: 13px;
     color: var(--clr-primary-a30);
     position: relative;
 
@@ -66,16 +73,42 @@ a.tpHP{
 a.hp{
     position: relative;
     left: 5px;
+    cursor: pointer;
 }
 a.lv{
-    position:fixed;
-    top: 7px;
+    font-size: 30px;
+    position:absolute;
+    top: -7px;
+    left: -7px;
     background-color: var(--clr-surface-a20);
-    border-radius: 11px;
-    height: 22px;
-    width: 22px;
+    border-radius: 22px;
+    height: 44px;
+    width: 44px;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid var(--clr-primary-a10);
 }
+a.name{
+    margin-left: 10px;
+    font-size: 30px;
+
+}
+a.name1{
+    margin-left: 20px;
+    font-size: 40px;
+
+}
+table{
+    margin: auto;
+}
+.arrow-up {
+    width: 0px; 
+    height: 0px; 
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    
+    border-bottom: 20px solid var(--clr-primary-a0);
+    margin: auto;
+  }
+  
