@@ -1,57 +1,69 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DND Encounter <st</title>
-    <link rel="stylesheet" href="../static/style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-
+    <title>DND Encounter</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='index.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="selected">
-
       <img
-          src="https://www.shutterstock.com/image-vector/dice-d20-playing-dnd-king-600nw-2404818815.jpg"
-          height="360"
-        />
-        <a class="lv" >3</a>
-        <a class="name1">
-          Барн
-        </a>
-        <table>
-          <tr>
-            <th>
-              <a class="small">AC</a>
-            </th>
-            <th>
-              <a class="small">HP</a>
-            </th>
-            <th>
-              <a class="small">Speed</a>
-            </th>
-          </tr>
-          <tr>
-            <th>
-              <a class="big">16</a>
-            </th>
-            <th>
-              <a class="big hp">46<a class="tpHP">+2</a></a>
-            </th>
-            <th>
-              <a class="big">30</a>
-            </th>
-          </tr>
-        </table>
+        src="{{ url_for('static', filename='img/' + selected.files[0].filename) }}"
+        height="360"
+      />
+      <a class="lv">{{ selected.lv }}</a>
+      <a class="name1"> {{ selected.name }} </a>
+      <table>
+        <tr>
+          <th>
+            <a class="small">AC</a>
+          </th>
+          <th>
+            <a class="small">HP</a>
+          </th>
+          <th>
+            <a class="small">Speed</a>
+          </th>
+        </tr>
+        <tr>
+          <th>
+            <a class="big">{{ selected.ac }}</a>
+          </th>
+          <th>
+            <a class="big hp">
+              {% if selected.hp < selected.hp_max %} {{ selected.hp }} {% elif
+              selected.hp > selected.hp_max %} {{ selected.hp_max }}
+
+              <a class="tpHP">+{{ selected.hp - selected.hp_max }}</a>
+
+              {% else %} {{ selected.hp }} {% endif %}
+            </a>
+          </th>
+          <th>
+            <a class="big">{{ selected.speed }}</a>
+          </th>
+        </tr>
+      </table>
     </div>
     <div class="encounter">
-      <div class="player">
-        
+      {% for player in players %}
+      <div
+        class="player"
+        onclick="window.location.href ='?selected={{player.id}}';"
+      >
         <img
-          src="https://www.shutterstock.com/image-vector/dice-d20-playing-dnd-king-600nw-2404818815.jpg"
+          src="{{ url_for('static', filename='img/' + player.files[0].filename) }}"
           height="180"
         />
-        <a class="lv" >3</a>
+        <a class="lv">{{ player.lv }}</a>
         <table>
-          <tr> 
+          <tr>
             <th>
               <a class="small">AC</a>
             </th>
@@ -64,21 +76,33 @@
           </tr>
           <tr>
             <th>
-              <a class="big">16</a>
+              <a class="big">{{ player.ac }}</a>
             </th>
             <th>
-              <a class="big hp">46<a class="tpHP">+2</a></a>
+              <a class="big hp">
+                {% if player.hp < player.hp_max %} {{ player.hp }} {% elif
+                player.hp > player.hp_max %} {{ player.hp_max }}
+
+                <a class="tpHP">+{{ player.hp - player.hp_max }}</a>
+
+                {% else %} {{ player.hp }} {% endif %}
+              </a>
             </th>
             <th>
-              <a class="big">30</a>
+              <a class="big">{{ player.speed }}</a>
             </th>
           </tr>
-          <a class="name">
-            Барн
-          </a>
+          <a class="name"> {{ player.name }} {{player.init}}</a>
         </table>
+        {% if player.id == counter.id %}
         <div class="arrow-up"></div>
+        {% endif %}
+      </div>
+      {% endfor %}
+      <div class="add" onclick="window.location.href ='add';">
+        <a class="add">+</a>
       </div>
     </div>
+    <a href="next">next</a>
   </body>
 </html>

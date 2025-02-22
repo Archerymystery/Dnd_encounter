@@ -30,6 +30,9 @@
 
 
 }
+body{
+    background-color: var(--clr-surface-a0);
+ }
 .selected{
     background-color:var(--clr-surface-a10);
     width: 400px;
@@ -45,6 +48,7 @@
     padding-top: 10px;
     position: relative; 
     cursor: pointer;
+    margin-left: 10px;
 }
 a {
     color: var(--clr-light-a0);
@@ -111,4 +115,29 @@ table{
     border-bottom: 20px solid var(--clr-primary-a0);
     margin: auto;
   }
-  
+
+div.add{
+    background-color: var(--clr-primary-a10);
+    width: 200px;
+    height: 317px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 317px; 
+    border-radius: var(--radius); 
+    margin-left: 10px;
+    cursor: pointer;
+}
+a.add{
+    font-size: 90px;
+    height: max-content;
+    width: max-content;
+}
+.encounter{
+    margin-top: 10px;
+    display:flex;
+    flex-direction: row;
+    background-color: var(--clr-surface-a20);
+    padding: 10px;
+    border-radius: var(--radius);
+    
+}

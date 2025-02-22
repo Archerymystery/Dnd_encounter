@@ -3,3 +3,8 @@
 __pycache__
 *.db
 uploads
+static/img/*
+!static/img/placeholder1.png
+!static/img/placeholder2.png
+!static/img/placeholder3.png
+!static/img/placeholder4.png
