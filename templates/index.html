@@ -6,12 +6,25 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='index.css') }}"
     />
+    <script src="{{ url_for('static', filename='main.js') }}"></script> 
     <link
       href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
+    <div id="customPrompt" class="modal">
+      <div class="modal-content">
+        <p>Змініть HP(зараз: {{selected.hp}})</p>
+        <input type="number" id="userInput" min="1" value="1"><br>
+        <div class="right">
+          <button class="add" onclick="HpAdd({{selected.id}})">Додати</button><br>
+          <button class="subtract" onclick="HpSubtract({{selected.id}})">Віднняти</button><br>
+          <button  onclick="document.getElementById('customPrompt').style.display = 'none';">Відміна</button>
+        </div>
+      </div>
+    </div>
+    {% if selected!=None %}
     <div class="selected">
       <img
         src="{{ url_for('static', filename='img/' + selected.files[0].filename) }}"
@@ -36,7 +49,7 @@
             <a class="big">{{ selected.ac }}</a>
           </th>
           <th>
-            <a class="big hp">
+            <a class="big hp" onclick="document.getElementById('customPrompt').style.display = 'block';">
               {% if selected.hp < selected.hp_max %} {{ selected.hp }} {% elif
               selected.hp > selected.hp_max %} {{ selected.hp_max }}
 
@@ -51,6 +64,7 @@
         </tr>
       </table>
     </div>
+    {% endif %}
     <div class="encounter">
       {% for player in players %}
       <div
