@@ -89,6 +89,16 @@ def hpSubtract():
             player.hp = player.hp-hp
             db.session.commit()
     return {"code":200}
+@app.route("/del",methods=["DELETE"])
+def delete_player():
+    json=request.get_json()
+    idd = json["id"]
+
+    if idd:
+        player = Player.query.get(int(idd))
+        if player:
+            db.session.delete(player)
+            db.session.commit()
+    return redirect(url_for("index"))
 if __name__ == "__main__":
-    app.run(debug=True)
     app.run(debug=True)

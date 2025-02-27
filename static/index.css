@@ -231,3 +231,32 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+.next{
+    position: absolute;
+    right: 10px;
+    top: 460px;
+    background: var(--clr-primary-a10);
+    outline: none;
+    border: none;
+    margin: auto;
+    height: 42px;
+    font-size: 16px;
+    padding: 14px 10px 0px 10px;
+    border-radius: 22px;
+    width: 95px;
+    color: var(--clr-light-a0);
+    font-family: "Cousine", serif;
+    /* margin-left: 50px; */
+    /* margin-top: 10px; */
+    cursor: pointer;
+
+
+}
+.trash:hover{
+    color: red;
+}
+.trash{
+    margin-left: 10px;
+    font-size: 30px;
+    margin-bottom: 10px;
+}

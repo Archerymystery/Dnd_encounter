@@ -19,3 +19,16 @@ function HpAdd(id){
 function HpSubtract(id){
     Hp('/hpSubtract',id)
 }
+async function Del(id){
+    try {
+        const response = await fetch("/del", {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({"id":id }),
+        });
+        location.reload();
+    } catch (error) {
+        alert("Щось не те")
+        console.error('Помилка:', error);
+    }
+}
