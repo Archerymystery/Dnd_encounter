@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Реєстрація</title>
+    <!-- Підключаємо CSS-стилі з папки static -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="form-container">
+      <!-- Відображення flash-повідомлень -->
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %} {% endif %} {% endwith %}
+
+      <h1>Реєстрація</h1>
+      <form method="post" action="{{ url_for('register') }}">
+        {{ form.hidden_tag() }}
+        <div>
+          <label for="username">Логін:</label>
+          {{ form.username(class="form-control") }} {% for error in
+          form.username.errors %}
+          <p class="error">{{ error }}</p>
+          {% endfor %}
+        </div>
+        <div>
+          <label for="password">Пароль:</label>
+          {{ form.password(class="form-control") }} {% for error in
+          form.password.errors %}
+          <p class="error">{{ error }}</p>
+          {% endfor %}
+        </div>
+        <button type="submit">Зареєструватися</button>
+      </form>
+      <br />
+      <a href="{{ url_for('login') }}">Вже є акаунт? Увійти</a>
+    </div>
+  </body>
+</html>
