@@ -7,6 +7,7 @@ from flask_login import login_user, logout_user, login_required, current_user
 from forms import LoginForm, RegistrationForm
 import random
 import os
+import time
 app = Flask(__name__)
 app.config.from_object(Config)
 db.init_app(app)
@@ -28,6 +29,9 @@ def index():
     players = Player.query.order_by(Player.init.desc()).filter_by(user_id=user.id)
     counter=user.counter
     selected = request.args.get('selected')
+    if len(players)==0:
+        return render_template("index.html",selected=None,counter=None,players=[])
+
     if selected is None:
         selectedPlayer = players[counter]
     else:
@@ -46,18 +50,19 @@ def add_player():
             initative = int(request.form.get("initative", "1"))
             level = int(request.form.get("level", "1"))
             player = Player(name=name,speed=speed,hp_max=hp_max,hp=hp_max,init=initative,ac=ac,lv=level)
-            files = request.files.getlist("img")
+            file= request.files.get("img")
             k=False
-            for file in files:
-                if file and allowed_file(file.filename):
-                    filename=f"{player.id}.{ os.path.splitext(file.filename)[1]}"
-                    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                    if not os.path.exists(app.config['UPLOAD_FOLDER']):
-                        os.makedirs(app.config['UPLOAD_FOLDER'])
-                    file.save(file_path)
-                    new_file = PlayerImg(filename=filename, player_img_id=player)
-                    db.session.add(new_file)
-                    k=True
+            # for file in files:
+            print(file)
+            if file and allowed_file(file.filename):
+                filename=f"{round(time.time()*1000)}{os.path.splitext(file.filename)[1]}"
+                file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                if not os.path.exists(app.config['UPLOAD_FOLDER']):
+                    os.makedirs(app.config['UPLOAD_FOLDER'])
+                file.save(file_path)
+                new_file = PlayerImg(filename=filename, player=player)
+                db.session.add(new_file)
+                k=True
             if k == False:
                 filename=f"placeholder{random.randint(1,4)}.png"
                 new_file = PlayerImg(filename=filename, player=player)
@@ -73,6 +78,7 @@ def next():
     if counter+1>len(players):
         counter=0
     return redirect(url_for("index"))
+<<<<<<< HEAD
 @app.route("/register", methods=["GET", "POST"])
 def register():
     form = RegistrationForm()
@@ -119,5 +125,40 @@ def logout():
     logout_user()
     return redirect(url_for("index"))
 
+=======
+@app.route("/hpAdd",methods=["PATCH"])
+def hpAdd():
+    json=request.get_json()
+    id = json["id"]
+    hp = int(json["hp"])
+    if id:
+        player = Player.query.get(int(id))
+        if player:
+            player.hp = player.hp+hp
+            db.session.commit()
+    return {"code":200}
+@app.route("/hpSubtract",methods=["PATCH"])
+def hpSubtract():
+    json=request.get_json()
+    id = json["id"]
+    hp = int(json["hp"])
+    if id:
+        player = Player.query.get(int(id))
+        if player:
+            player.hp = player.hp-hp
+            db.session.commit()
+    return {"code":200}
+@app.route("/del",methods=["DELETE"])
+def delete_player():
+    json=request.get_json()
+    idd = json["id"]
+
+    if idd:
+        player = Player.query.get(int(idd))
+        if player:
+            db.session.delete(player)
+            db.session.commit()
+    return redirect(url_for("index"))
+>>>>>>> afe6ae3fc12a0447a9cb4e0a97389ece275137d8
 if __name__ == "__main__":
     app.run(debug=True)

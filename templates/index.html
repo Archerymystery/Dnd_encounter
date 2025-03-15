@@ -6,12 +6,26 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='index.css') }}"
     />
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="{{ url_for('static', filename='main.js') }}"></script> 
     <link
       href="https://fonts.googleapis.com/css2?family=Cousine:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
+    <div id="customPrompt" class="modal">
+      <div class="modal-content">
+        <p>Змініть HP(зараз: {{selected.hp}})</p>
+        <input type="number" id="userInput" min="1" value="1"><br>
+        <div class="right">
+          <button class="add" onclick="HpAdd({{selected.id}})">Додати</button><br>
+          <button class="subtract" onclick="HpSubtract({{selected.id}})">Віднняти</button><br>
+          <button  onclick="document.getElementById('customPrompt').style.display = 'none';">Відміна</button>
+        </div>
+      </div>
+    </div>
+    {% if selected!=None %}
     <div class="selected">
       <img
         src="{{ url_for('static', filename='img/' + selected.files[0].filename) }}"
@@ -36,7 +50,7 @@
             <a class="big">{{ selected.ac }}</a>
           </th>
           <th>
-            <a class="big hp">
+            <a class="big hp" onclick="document.getElementById('customPrompt').style.display = 'block';">
               {% if selected.hp < selected.hp_max %} {{ selected.hp }} {% elif
               selected.hp > selected.hp_max %} {{ selected.hp_max }}
 
@@ -50,7 +64,10 @@
           </th>
         </tr>
       </table>
+      <a onclick="Del({{selected.id}})" class="trash"><i class="fa-solid fa-trash-can"></i></a>
     </div>
+    <div onclick="window.location.href='next'" class="next">Наступний</div>
+    {% endif %}
     <div class="encounter">
       {% for player in players %}
       <div
@@ -92,7 +109,7 @@
               <a class="big">{{ player.speed }}</a>
             </th>
           </tr>
-          <a class="name"> {{ player.name }} {{player.init}}</a>
+          <a class="name"> {{ player.name }}</a>
         </table>
         {% if player.id == counter.id %}
         <div class="arrow-up"></div>
@@ -103,6 +120,6 @@
         <a class="add">+</a>
       </div>
     </div>
-    <a href="next">next</a>
+    
   </body>
 </html>
