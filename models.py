@@ -30,7 +30,6 @@ class User(db.Model, UserMixin):
     )  
     players = db.relationship('Player', backref='user', lazy=True)
     counter = db.Column(db.Integer,nullable=False,default=0)
-    level = db.Column(db.Integer,nullable=False,default=0)
-    
+
     def __repr__(self):
         return f"<User {self.username}>"

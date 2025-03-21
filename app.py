@@ -6,12 +6,14 @@ from extensions import db, login_manager
 from flask_login import login_user, logout_user, login_required, current_user
 from forms import LoginForm, RegistrationForm
 import random
+
+from admin import admin
 import os
 import time
 app = Flask(__name__)
 app.config.from_object(Config)
 db.init_app(app)
-#admin.init_app(app)
+admin.init_app(app)
 login_manager.init_app(app)
 with app.app_context():
     db.create_all()
@@ -26,7 +28,7 @@ def allowed_file(filename):
 def index():
     user = current_user
 
-    players = Player.query.order_by(Player.init.desc()).filter_by(user_id=user.id)
+    players = Player.query.filter_by(user_id=user.id).order_by(Player.init.desc()).all()
     counter=user.counter
     selected = request.args.get('selected')
     if len(players)==0:
@@ -36,9 +38,11 @@ def index():
         selectedPlayer = players[counter]
     else:
         selectedPlayer = Player.query.get(int(selected))
+    print(players)
     return render_template("index.html",selected=selectedPlayer,counter=players[counter],players=players)
 @app.route("/add", methods=["POST","GET"])
 def add_player():
+    user= current_user
     if request.method=="GET":
         return render_template("add.html")
     if request.method=="POST":
@@ -49,7 +53,7 @@ def add_player():
             hp_max = int(request.form.get("hp", "1"))
             initative = int(request.form.get("initative", "1"))
             level = int(request.form.get("level", "1"))
-            player = Player(name=name,speed=speed,hp_max=hp_max,hp=hp_max,init=initative,ac=ac,lv=level)
+            player = Player(name=name,speed=speed,hp_max=hp_max,hp=hp_max,init=initative,ac=ac,lv=level,user_id=user.id)
             file= request.files.get("img")
             k=False
             # for file in files:
@@ -72,13 +76,19 @@ def add_player():
         return redirect(url_for("index"))
 @app.route("/next")
 def next():
-    global counter
-    counter +=1
-    players = Player.query.all()
+    user= current_user
+  
+    counter =user.counter+1
+
+    players = Player.query.filter_by(user_id=user.id).all()
+    print(counter,players)
     if counter+1>len(players):
         counter=0
+    user.counter=counter
+    db.session.add(user)
+    db.session.commit()
     return redirect(url_for("index"))
-<<<<<<< HEAD
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     form = RegistrationForm()
@@ -125,7 +135,7 @@ def logout():
     logout_user()
     return redirect(url_for("index"))
 
-=======
+
 @app.route("/hpAdd",methods=["PATCH"])
 def hpAdd():
     json=request.get_json()
@@ -159,6 +169,6 @@ def delete_player():
             db.session.delete(player)
             db.session.commit()
     return redirect(url_for("index"))
->>>>>>> afe6ae3fc12a0447a9cb4e0a97389ece275137d8
+
 if __name__ == "__main__":
     app.run(debug=True)

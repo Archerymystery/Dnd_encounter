@@ -1,0 +1,143 @@
+/* Додаємо шрифт Cousine */
+@import url('https://fonts.googleapis.com/css2?family=Cousine&display=swap');
+:root {
+    --radius:8px;
+      /** Base colors */
+   --clr-dark-a0: #000000;
+   --clr-light-a0: #ffffff;
+   
+   /** Dark theme primary colors */
+   --clr-primary-a0: #ffa500;
+   --clr-primary-a10: #ffaf35;
+   --clr-primary-a20: #ffb952;
+   --clr-primary-a30: #ffc36c;
+   --clr-primary-a40: #ffcd85;
+   --clr-primary-a50: #ffd79d;
+   
+   /** Dark theme surface colors */
+   --clr-surface-a0: #1c1c1c;
+   --clr-surface-a10: #313131;
+   --clr-surface-a20: #474747;
+   --clr-surface-a30: #5f5f5f;
+   --clr-surface-a40: #777777;
+   --clr-surface-a50: #919191;
+   
+   /** Dark theme tonal surface colors */
+   --clr-surface-tonal-a0: #453420;
+   --clr-surface-tonal-a10: #584835;
+   --clr-surface-tonal-a20: #6c5c4b;
+   --clr-surface-tonal-a30: #807162;
+   --clr-surface-tonal-a40: #94887b;
+   --clr-surface-tonal-a50: #a99e94;
+   
+   
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--clr-surface-a0);
+    font-family: "Cousine", monospace;
+}
+
+.form-container {
+    background-color: var(--clr-surface-a10);
+    padding: 2rem;
+    border-radius: var(--radius);
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    color: var(--clr-light-a0);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-control {
+    width: 100%;
+    box-sizing: border-box; 
+    padding: 0.8rem;
+    border: 2px solid var(--clr-surface-a30);
+    border-radius: var(--radius);
+    background-color: var(--clr-surface-a20);
+    color: var(--clr-light-a0);
+    font-family: "Cousine", monospace;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--clr-primary-a30);
+}
+
+label {
+    color: var(--clr-light-a0);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+button[type="submit"] {
+    background-color: var(--clr-primary-a10);
+    color: var(--clr-light-a0);
+    padding: 0.8rem;
+    border: none;
+    border-radius: var(--radius);
+    font-family: "Cousine", monospace;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--clr-primary-a20);
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.alert-success {
+    background-color: var(--clr-primary-a50);
+    color: var(--clr-dark-a0);
+}
+
+.alert-danger {
+    background-color: #dc3545;
+    color: var(--clr-light-a0);
+}
+
+.error {
+    color: var(--clr-primary-a0);
+    font-size: 0.9rem;
+    margin-top: 0.3rem;
+}
+
+a {
+    color: var(--clr-primary-a30);
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--clr-primary-a20);
+    text-decoration: underline;
+}
+

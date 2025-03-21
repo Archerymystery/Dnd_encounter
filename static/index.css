@@ -260,3 +260,17 @@ input[type=number] {
     font-size: 30px;
     margin-bottom: 10px;
 }
+.logout{
+    position: fixed; /* Фіксована позиція */
+    top: 20px; /* Відступ зверху */
+    left: 20px; /* Відступ зліва */
+    padding: 10px 20px; /* Внутрішні відступи */
+    background-color: var(--clr-primary-a10); /* Колір фону */
+    color: var(--clr-light-a0); /* Колір тексту */
+    text-decoration: none; /* Видаляємо підкреслення */
+    border-radius: var(--radius); /* Закруглені кути */
+    font-family: "Cousine", monospace; /* Шрифт */
+    font-size: 16px; /* Розмір тексту */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Тінь */
+    transition: background-color 0.3s ease; /* Плавна анімація */
+}

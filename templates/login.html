@@ -7,18 +7,19 @@
     <!-- Підключаємо CSS-стилі з папки static -->
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='styles.css') }}"
+      href="{{ url_for('static', filename='login.css') }}"
     />
   </head>
   <body>
     <div class="form-container">
+      <h2>Вхід</h2>
       <!-- Відображення flash-повідомлень -->
       {% with messages = get_flashed_messages(with_categories=true) %} {% if
       messages %} {% for category, message in messages %}
       <div class="alert alert-{{ category }}">{{ message }}</div>
       {% endfor %} {% endif %} {% endwith %}
 
-      <h2>Вхід до адмін-панелі</h2>
+     
       <form method="post" action="{{ url_for('login') }}">
         {{ form.hidden_tag() }}
         <div>
