@@ -162,12 +162,21 @@ def hpSubtract():
 def delete_player():
     json=request.get_json()
     idd = json["id"]
-
+    user=current_user
     if idd:
         player = Player.query.get(int(idd))
         if player:
+            counter =user.counter
+
+            players = Player.query.filter_by(user_id=user.id).all()
+           
+            if counter+1>len(players)-1:
+                counter=counter-1
+            user.counter=counter
             db.session.delete(player)
+            db.session.add(user)
             db.session.commit()
+            
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
